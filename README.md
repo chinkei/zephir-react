@@ -16,7 +16,7 @@ zephir build
 ```
 ## 使用
 
-Here is an example of a simple TCP server listening on port 8082 by eventloop
+这是一个使用libevent实现的监听8082端口的Tcp Server
 ```php
 <?php
 	$loop = React\EventLoop\Factory::create();
@@ -27,7 +27,6 @@ Here is an example of a simple TCP server listening on port 8082 by eventloop
         $conn = stream_socket_accept($server);
         $data = "HTTP/1.1 200 OK\r\nContent-Length: 3\r\n\r\nHi\n";
         $loop->addWriteStream($conn, function ($conn) use (&$data, $loop) {
-        	echo (int)$conn;
             $written = fwrite($conn, $data);
             if ($written === strlen($data)) {
                 fclose($conn);
@@ -64,3 +63,4 @@ Promise
 Dns
 ```
 And more....
+
